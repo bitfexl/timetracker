@@ -44,6 +44,7 @@ export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
                     format={timeFormat}
                     defaultValue={value.from == null ? undefined : dayjs(value.from, timeFormat)}
                     onChange={handleChangeFrom}
+                    minuteStep={5}
                     placeholder="End time"
                     style={{ width: 155 }}
                 ></TimePicker>
@@ -53,6 +54,7 @@ export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
                     format={timeFormat}
                     defaultValue={value.to == null ? undefined : dayjs(value.to, timeFormat)}
                     onChange={handleChangeTo}
+                    minuteStep={5}
                     placeholder="End time"
                     style={{ width: 155 }}
                 ></TimePicker>
