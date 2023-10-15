@@ -1,6 +1,6 @@
 import { Button, DatePicker, TimePicker } from "antd";
 import { CreateTimeRecordLayout } from "../layout/CreateTimeRecordLayout";
-import TextArea from "antd/es/input/TextArea";
+import TextArea, { TextAreaRef } from "antd/es/input/TextArea";
 import dayjs, { Dayjs } from "dayjs";
 import { TimeRecord } from "../types/TimeRecord";
 
@@ -35,7 +35,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
             datePicker={
                 <DatePicker
                     format={dateFormat}
-                    defaultValue={value.date == null ? undefined : dayjs(value.date, dateFormat)}
+                    value={value.date == null ? undefined : dayjs(value.date, dateFormat)}
                     onChange={handleChangeDate}
                     style={{ width: 155 }}
                 ></DatePicker>
@@ -43,7 +43,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
             fromPicker={
                 <TimePicker
                     format={timeFormat}
-                    defaultValue={value.from == null ? undefined : dayjs(value.from, timeFormat)}
+                    value={value.from == null ? undefined : dayjs(value.from, timeFormat)}
                     onChange={handleChangeFrom}
                     minuteStep={5}
                     placeholder="Start time"
@@ -53,7 +53,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
             toPicker={
                 <TimePicker
                     format={timeFormat}
-                    defaultValue={value.to == null ? undefined : dayjs(value.to, timeFormat)}
+                    value={value.to == null ? undefined : dayjs(value.to, timeFormat)}
                     onChange={handleChangeTo}
                     minuteStep={5}
                     placeholder="End time"
@@ -64,7 +64,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
                 <TextArea
                     rows={5}
                     cols={40}
-                    defaultValue={value.task ?? undefined}
+                    value={value.task ?? undefined}
                     placeholder="Enter the worked on task"
                     onChange={(e) => handleChangeTask(e.target.value)}
                 ></TextArea>

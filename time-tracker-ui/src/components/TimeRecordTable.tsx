@@ -12,7 +12,7 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
     const timeFormat = "HH:mm";
 
     const sortedRecordsDataSource = useMemo(
-        () => records.map((record) => ({ ...record, key: toNumber(record) })).sort((a, b) => a.key - b.key),
+        () => records.map((record) => ({ ...record, key: toNumber(record) })).sort((a, b) => b.key - a.key),
         [records]
     );
 
@@ -21,10 +21,10 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
             if (record.from != null) {
                 return dayjs(record.date + record.from, dateFormat + timeFormat).unix();
             } else {
-                return dayjs(record.date, dateFormat).unix();
+                return dayjs(record.date, dateFormat).add(1, "day").unix();
             }
         } else if (record.from != null) {
-            return dayjs("1970-01-01" + record.from, dateFormat + timeFormat).unix();
+            return dayjs("9999-12-31" + record.from, dateFormat + timeFormat).unix();
         } else {
             return 0;
         }
