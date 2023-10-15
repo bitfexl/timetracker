@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 import { TimeRecord } from "./types/TimeRecord";
-import { TimeRecordTable } from "./layout/TimeRecordTable";
+import { TimeRecordTable } from "./components/TimeRecordTable";
 
 function App() {
     const [timeRecords, setTimeRecords] = useState<TimeRecord[]>([]);
