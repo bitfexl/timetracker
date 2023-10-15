@@ -2,33 +2,31 @@ import { Button, DatePicker, TimePicker } from "antd";
 import { CreateTimeRecordLayout } from "../layout/CreateTimeRecordLayout";
 import TextArea from "antd/es/input/TextArea";
 import dayjs, { Dayjs } from "dayjs";
+import { TimeRecord } from "../types/TimeRecord";
 
 export interface CreateTimeRecordProps {
-    onChange: (date: string | null, from: string | null, to: string | null, task: string | null) => any;
-    dateValue: string | null;
-    fromValue: string | null;
-    toValue: string | null;
-    taskValue: string | null;
+    onChange: (timeRecord: TimeRecord) => any;
+    value: TimeRecord;
 }
 
-export function CreateTimeRecord({ onChange, dateValue, fromValue, toValue, taskValue }: CreateTimeRecordProps) {
+export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
     const dateFormat = "YYYY-MM-DD";
     const timeFormat = "HH:mm";
 
     function handleChangeDate(date: Dayjs | null) {
-        onChange(date?.format(dateFormat) ?? null, fromValue, toValue, taskValue);
+        onChange({ ...value, date: date?.format(dateFormat) ?? null });
     }
 
     function handleChangeFrom(from: Dayjs | null) {
-        onChange(dateValue, from?.format(timeFormat) ?? null, toValue, taskValue);
+        onChange({ ...value, from: from?.format(timeFormat) ?? null });
     }
 
     function handleChangeTo(to: Dayjs | null) {
-        onChange(dateValue, fromValue, to?.format(timeFormat) ?? null, taskValue);
+        onChange({ ...value, to: to?.format(timeFormat) ?? null });
     }
 
     function handleChangeTask(task: string | null) {
-        onChange(dateValue, fromValue, toValue, task);
+        onChange({ ...value, task });
     }
 
     return (
@@ -36,7 +34,7 @@ export function CreateTimeRecord({ onChange, dateValue, fromValue, toValue, task
             datePicker={
                 <DatePicker
                     format={dateFormat}
-                    defaultValue={dateValue == null ? undefined : dayjs(dateValue, dateFormat)}
+                    defaultValue={value.date == null ? undefined : dayjs(value.date, dateFormat)}
                     onChange={handleChangeDate}
                     style={{ width: 155 }}
                 ></DatePicker>
@@ -44,7 +42,7 @@ export function CreateTimeRecord({ onChange, dateValue, fromValue, toValue, task
             fromPicker={
                 <TimePicker
                     format={timeFormat}
-                    defaultValue={fromValue == null ? undefined : dayjs(fromValue, timeFormat)}
+                    defaultValue={value.from == null ? undefined : dayjs(value.from, timeFormat)}
                     onChange={handleChangeFrom}
                     placeholder="End time"
                     style={{ width: 155 }}
@@ -53,7 +51,7 @@ export function CreateTimeRecord({ onChange, dateValue, fromValue, toValue, task
             toPicker={
                 <TimePicker
                     format={timeFormat}
-                    defaultValue={toValue == null ? undefined : dayjs(toValue, timeFormat)}
+                    defaultValue={value.to == null ? undefined : dayjs(value.to, timeFormat)}
                     onChange={handleChangeTo}
                     placeholder="End time"
                     style={{ width: 155 }}
@@ -63,7 +61,7 @@ export function CreateTimeRecord({ onChange, dateValue, fromValue, toValue, task
                 <TextArea
                     rows={5}
                     cols={40}
-                    defaultValue={taskValue ?? undefined}
+                    defaultValue={value.task ?? undefined}
                     onChange={(e) => handleChangeTask(e.target.value)}
                 ></TextArea>
             }

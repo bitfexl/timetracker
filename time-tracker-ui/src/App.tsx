@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Button } from "antd";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
+import { TimeRecord } from "./types/TimeRecord";
 
 function App() {
     const [count, setCount] = useState(1);
-    const [timeRecord, setTimeRecord] = useState<{ date: string | null; from: string | null; to: string | null; task: string | null }>({
+    const [timeRecord, setTimeRecord] = useState<TimeRecord>({
         date: null,
         from: null,
         to: null,
@@ -18,13 +19,10 @@ function App() {
             </Button>
 
             <CreateTimeRecord
-                dateValue={timeRecord.date}
-                fromValue={timeRecord.from}
-                toValue={timeRecord.to}
-                taskValue={timeRecord.task}
-                onChange={(date, from, to, task) => {
-                    console.table({ date, from, to, task });
-                    setTimeRecord({ date, from, to, task });
+                value={timeRecord}
+                onChange={(timeRecord) => {
+                    console.table(timeRecord);
+                    setTimeRecord(timeRecord);
                 }}
             ></CreateTimeRecord>
         </div>
