@@ -1,6 +1,6 @@
 import { Button, DatePicker, TimePicker } from "antd";
 import { CreateTimeRecordLayout } from "../layout/CreateTimeRecordLayout";
-import TextArea, { TextAreaRef } from "antd/es/input/TextArea";
+import TextArea from "antd/es/input/TextArea";
 import dayjs, { Dayjs } from "dayjs";
 import { TimeRecord } from "../types/TimeRecord";
 
