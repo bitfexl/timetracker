@@ -26,7 +26,7 @@ function App() {
     }
 
     return (
-        <div className="inline-flex flex-col gap-2 ml-80">
+        <div className="inline-flex flex-col gap-2 ml-40 mr-40">
             <CreateTimeRecord
                 value={timeRecord}
                 onChange={(timeRecord) => {
