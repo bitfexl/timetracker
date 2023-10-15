@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button } from "antd";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 import { TimeRecord } from "./types/TimeRecord";
+import { TimeRecordTable } from "./layout/TimeRecordTable";
 
 function App() {
-    const [count, setCount] = useState(1);
+    const [timeRecords, setTimeRecords] = useState<TimeRecord[]>([]);
     const [timeRecord, setTimeRecord] = useState<TimeRecord>({
         date: null,
         from: null,
@@ -12,19 +12,30 @@ function App() {
         task: null,
     });
 
-    return (
-        <div className="inline-flex flex-col gap-2">
-            <Button type="primary" onClick={() => setCount((c) => c + 1)}>
-                {count}
-            </Button>
+    function handleCreate() {
+        setTimeRecords((records) => [...records, timeRecord]);
+        setTimeRecord({
+            date: null,
+            from: null,
+            to: null,
+            task: null,
+        });
+    }
 
+    return (
+        <div className="inline-flex flex-col gap-2 ml-80">
             <CreateTimeRecord
                 value={timeRecord}
                 onChange={(timeRecord) => {
                     console.table(timeRecord);
                     setTimeRecord(timeRecord);
                 }}
+                onCreate={handleCreate}
             ></CreateTimeRecord>
+
+            <br />
+
+            <TimeRecordTable records={timeRecords}></TimeRecordTable>
         </div>
     );
 }

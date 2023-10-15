@@ -7,9 +7,10 @@ import { TimeRecord } from "../types/TimeRecord";
 export interface CreateTimeRecordProps {
     onChange: (timeRecord: TimeRecord) => any;
     value: TimeRecord;
+    onCreate: () => any;
 }
 
-export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
+export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecordProps) {
     const dateFormat = "YYYY-MM-DD";
     const timeFormat = "HH:mm";
 
@@ -68,7 +69,11 @@ export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
                     onChange={(e) => handleChangeTask(e.target.value)}
                 ></TextArea>
             }
-            createButton={<Button type="primary">Create</Button>}
+            createButton={
+                <Button type="primary" onClick={onCreate}>
+                    Create
+                </Button>
+            }
         ></CreateTimeRecordLayout>
     );
 }
