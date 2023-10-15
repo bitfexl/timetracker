@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 import { TimeRecord } from "./types/TimeRecord";
 import { TimeRecordTable } from "./components/TimeRecordTable";
+import { Button } from "antd";
 
 function App() {
     const [timeRecords, setTimeRecords] = useState<TimeRecord[]>([]);
@@ -35,7 +36,13 @@ function App() {
 
             <br />
 
-            <TimeRecordTable records={timeRecords}></TimeRecordTable>
+            <div className="print-me">
+                <TimeRecordTable records={timeRecords}></TimeRecordTable>
+            </div>
+
+            <br />
+
+            <Button onClick={window.print}>Print</Button>
         </div>
     );
 }
