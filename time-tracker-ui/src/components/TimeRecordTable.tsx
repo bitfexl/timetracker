@@ -12,9 +12,20 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
     const timeFormat = "HH:mm";
 
     const sortedRecordsDataSource = useMemo(
-        () => records.map((record) => ({ ...record, key: toNumber(record) })).sort((a, b) => b.key - a.key),
+        () => records.map((record) => ({ ...record, key: toNumber(record), time: getTime(record) })).sort((a, b) => b.key - a.key),
         [records]
     );
+
+    function getTime(record: TimeRecord): string {
+        return m2HHmm(dayjs(record.to, timeFormat).diff(dayjs(record.from, timeFormat), "m"));
+    }
+
+    function m2HHmm(minutes: number): string {
+        let h = Math.floor(minutes / 60);
+        let m = minutes % 60;
+
+        return (h < 10 ? "0" + h.toString() : h.toString()) + ":" + (m < 10 ? "0" + m.toString() : m.toString());
+    }
 
     function toNumber(record: TimeRecord): number {
         if (record.date != null) {
@@ -42,6 +53,10 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
         {
             title: "To",
             dataIndex: "to",
+        },
+        {
+            title: "Time",
+            dataIndex: "time",
         },
         {
             title: "Task",
