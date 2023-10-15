@@ -3,9 +3,11 @@ import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 import { TimeRecord } from "./types/TimeRecord";
 import { TimeRecordTable } from "./components/TimeRecordTable";
 import { Button } from "antd";
+import { useLocalStorage } from "./util/LocalStorageHook";
 
 function App() {
-    const [timeRecords, setTimeRecords] = useState<TimeRecord[]>([]);
+    const [timeRecords, setTimeRecords] = useLocalStorage<TimeRecord[]>("timerecords", []);
+
     const [timeRecord, setTimeRecord] = useState<TimeRecord>({
         date: null,
         from: null,
