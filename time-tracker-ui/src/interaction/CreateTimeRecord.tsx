@@ -45,7 +45,7 @@ export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
                     defaultValue={value.from == null ? undefined : dayjs(value.from, timeFormat)}
                     onChange={handleChangeFrom}
                     minuteStep={5}
-                    placeholder="End time"
+                    placeholder="Start time"
                     style={{ width: 155 }}
                 ></TimePicker>
             }
@@ -64,6 +64,7 @@ export function CreateTimeRecord({ onChange, value }: CreateTimeRecordProps) {
                     rows={5}
                     cols={40}
                     defaultValue={value.task ?? undefined}
+                    placeholder="Enter the worked on task"
                     onChange={(e) => handleChangeTask(e.target.value)}
                 ></TextArea>
             }
