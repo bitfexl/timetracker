@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { Button, DatePicker, TimePicker } from "antd";
-import { DateTimePicker } from "./interaction/DateTimePicker";
-import { CreateTimeRecordLayout } from "./layout/CreateTimeRecordLayout";
-import TextArea from "antd/es/input/TextArea";
+import { Button } from "antd";
+import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 
 function App() {
     const [count, setCount] = useState(1);
-    const [dateTime, setDateTime] = useState<{ date: string | null; from: string | null; to: string | null }>({
+    const [timeRecord, setTimeRecord] = useState<{ date: string | null; from: string | null; to: string | null; task: string | null }>({
         date: null,
         from: null,
         to: null,
+        task: null,
     });
 
     return (
@@ -18,25 +17,16 @@ function App() {
                 {count}
             </Button>
 
-            <DateTimePicker
-                onChange={(date, from, to) => {
-                    setDateTime({ date, from, to });
-                    console.log({ date, from, to });
+            <CreateTimeRecord
+                dateValue={timeRecord.date}
+                fromValue={timeRecord.from}
+                toValue={timeRecord.to}
+                taskValue={timeRecord.task}
+                onChange={(date, from, to, task) => {
+                    console.table({ date, from, to, task });
+                    setTimeRecord({ date, from, to, task });
                 }}
-                dateValue={dateTime.date}
-                fromValue={dateTime.from}
-                toValue={dateTime.to}
-            ></DateTimePicker>
-
-            <br />
-
-            <CreateTimeRecordLayout
-                datePicker={<DatePicker style={{ width: 155 }}></DatePicker>}
-                fromPicker={<TimePicker placeholder="End time" style={{ width: 155 }}></TimePicker>}
-                toPicker={<TimePicker placeholder="End time" style={{ width: 155 }}></TimePicker>}
-                taskText={<TextArea rows={5} cols={40}></TextArea>}
-                createButton={<Button type="primary">Create</Button>}
-            ></CreateTimeRecordLayout>
+            ></CreateTimeRecord>
         </div>
     );
 }
