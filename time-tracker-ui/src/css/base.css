@@ -1,0 +1,14 @@
+@layer base {
+    * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .test-br {
+        @apply border-solid border border-red-500;
+    }
+}
