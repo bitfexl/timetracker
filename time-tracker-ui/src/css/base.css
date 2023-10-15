@@ -12,7 +12,15 @@
         @apply border-solid border border-red-500;
     }
 
+    .print-only {
+        display: none;
+    }
+
     @media print {
+        .print-only {
+            display: block;
+        }
+
         .print-me {
             position: fixed;
             top: 0;

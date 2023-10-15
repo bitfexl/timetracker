@@ -37,6 +37,7 @@ function App() {
             <br />
 
             <div className="print-me">
+                <h1 className="print-only">Time Records</h1>
                 <TimeRecordTable records={timeRecords}></TimeRecordTable>
             </div>
 
