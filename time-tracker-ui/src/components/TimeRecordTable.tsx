@@ -41,22 +41,28 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
         }
     }
 
+    const render = (content: string) => <span className="inline-block w-max">{content}</span>;
+
     const columns = [
         {
             title: "Date",
             dataIndex: "date",
+            render,
         },
         {
             title: "From",
             dataIndex: "from",
+            render,
         },
         {
             title: "To",
             dataIndex: "to",
+            render,
         },
         {
             title: "Time",
             dataIndex: "time",
+            render,
         },
         {
             title: "Task",
