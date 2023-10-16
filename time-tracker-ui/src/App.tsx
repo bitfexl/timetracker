@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
 import { TimeRecord } from "./types/TimeRecord";
 import { TimeRecordTable } from "./components/TimeRecordTable";
 import { Button } from "antd";
 import { useLocalStorage } from "./util/LocalStorageHook";
+import { printElement } from "./util/Print";
 
 function App() {
+    const printDivRef = useRef<HTMLDivElement>(null);
+
     const [timeRecords, setTimeRecords] = useLocalStorage<TimeRecord[]>("timerecords", []);
 
     const [timeRecord, setTimeRecord] = useState<TimeRecord>({
@@ -38,14 +41,14 @@ function App() {
 
             <br />
 
-            <div className="print-me">
+            <div ref={printDivRef} className="print-me">
                 <h1 className="print-only">Time Records</h1>
                 <TimeRecordTable records={timeRecords}></TimeRecordTable>
             </div>
 
             <br />
 
-            <Button onClick={window.print}>Print</Button>
+            <Button onClick={() => printElement(printDivRef.current!)}>Print</Button>
         </div>
     );
 }
