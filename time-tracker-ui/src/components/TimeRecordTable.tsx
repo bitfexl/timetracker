@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import { TimeRecord } from "../types/TimeRecord";
 import dayjs from "dayjs";
-import { Table } from "antd";
+import { Button, Table } from "antd";
+import { ColumnType } from "antd/es/table";
 
 export interface TimeRecordTableProps {
     records: TimeRecord[];
+    renderAction: boolean;
 }
 
-export function TimeRecordTable({ records }: TimeRecordTableProps) {
+export function TimeRecordTable({ records, renderAction }: TimeRecordTableProps) {
     const dateFormat = "YYYY-MM-DD";
     const timeFormat = "HH:mm";
 
@@ -43,7 +45,7 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
 
     const render = (content: string) => <span className="inline-block w-max">{content}</span>;
 
-    const columns = [
+    const columns: ColumnType<TimeRecord>[] = [
         {
             title: "Date",
             dataIndex: "date",
@@ -69,6 +71,21 @@ export function TimeRecordTable({ records }: TimeRecordTableProps) {
             dataIndex: "task",
         },
     ];
+
+    if (renderAction) {
+        columns.push({
+            title: "Action",
+            key: "action",
+            render(text, record, index) {
+                return (
+                    <>
+                        <Button type="link">Edit</Button>
+                        <Button type="link">Delete</Button>
+                    </>
+                );
+            },
+        });
+    }
 
     return <Table columns={columns} dataSource={sortedRecordsDataSource} pagination={false}></Table>;
 }

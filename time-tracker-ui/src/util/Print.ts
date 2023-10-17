@@ -1,8 +1,14 @@
-export function printElement(element: HTMLElement) {
-    const className = randomClassName("print-");
+/**
+ * Print an element.
+ * @param element The element to print.
+ * @returns A promise which will resolve after the print is either completed or cancled by the user.
+ */
+export async function printElement(element: HTMLElement) {
+    return new Promise<void>((resolve) => {
+        const className = randomClassName("print-");
 
-    const style = document.createElement("style");
-    style.innerHTML = `
+        const style = document.createElement("style");
+        style.innerHTML = `
         @media print {
             :not(.${className}, .inner-${className} *) {
                 display: none !important;
@@ -19,17 +25,20 @@ export function printElement(element: HTMLElement) {
         }
     `;
 
-    style.onload = () => {
-        window.print();
+        style.onload = () => {
+            window.print();
 
-        document.head.removeChild(style);
-        removeClass(element, className);
-        element.classList.remove("inner-" + className);
-    };
+            document.head.removeChild(style);
+            removeClass(element, className);
+            element.classList.remove("inner-" + className);
 
-    addClass(element, className);
-    element.classList.add("inner-" + className);
-    document.head.appendChild(style);
+            resolve();
+        };
+
+        addClass(element, className);
+        element.classList.add("inner-" + className);
+        document.head.appendChild(style);
+    });
 }
 
 function addClass(element: HTMLElement, className: string) {
