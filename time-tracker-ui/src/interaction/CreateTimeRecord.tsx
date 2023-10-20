@@ -8,9 +8,10 @@ export interface CreateTimeRecordProps {
     onChange: (timeRecord: TimeRecord) => any;
     value: TimeRecord;
     onCreate: () => any;
+    editMode: boolean;
 }
 
-export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecordProps) {
+export function CreateTimeRecord({ editMode, onChange, value, onCreate }: CreateTimeRecordProps) {
     const dateFormat = "YYYY-MM-DD";
     const timeFormat = "HH:mm";
 
@@ -32,6 +33,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
 
     return (
         <CreateTimeRecordLayout
+            title={`${editMode ? "Edit" : "Create"} Time Record`}
             datePicker={
                 <DatePicker
                     format={dateFormat}
@@ -71,7 +73,7 @@ export function CreateTimeRecord({ onChange, value, onCreate }: CreateTimeRecord
             }
             createButton={
                 <Button type="primary" onClick={onCreate}>
-                    Create
+                    {`${editMode ? "Save" : "Create"}`}
                 </Button>
             }
         ></CreateTimeRecordLayout>

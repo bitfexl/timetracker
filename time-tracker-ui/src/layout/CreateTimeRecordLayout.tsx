@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export interface CreateTimeRecordLayoutProps {
+    title: string;
     datePicker: ReactNode;
     fromPicker: ReactNode;
     toPicker: ReactNode;
@@ -8,11 +9,11 @@ export interface CreateTimeRecordLayoutProps {
     createButton: ReactNode;
 }
 
-export function CreateTimeRecordLayout({ datePicker, fromPicker, toPicker, taskText, createButton }: CreateTimeRecordLayoutProps) {
+export function CreateTimeRecordLayout({ title, datePicker, fromPicker, toPicker, taskText, createButton }: CreateTimeRecordLayoutProps) {
     return (
         <div className="flex flex-col gap-4">
             <div>
-                <h3>Create Time Record</h3>
+                <h3>{title}</h3>
             </div>
 
             <div className="flex flex-row gap-4">
@@ -42,14 +43,10 @@ export function CreateTimeRecordLayout({ datePicker, fromPicker, toPicker, taskT
                             <b>Task</b>
                         </div>
 
-                        <div className="mb-10">
-                            {taskText}
-                        </div>
+                        <div className="mb-10">{taskText}</div>
                     </div>
 
-                    <div className="text-right absolute bottom-0 right-0">
-                        {createButton}
-                    </div>
+                    <div className="text-right absolute bottom-0 right-0">{createButton}</div>
                 </div>
             </div>
         </div>
