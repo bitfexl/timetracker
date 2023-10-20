@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { CreateTimeRecord } from "./interaction/CreateTimeRecord";
-import { TimeRecord } from "./types/TimeRecord";
+import { CompleteTimeRecord, TimeRecord, toCompleteRecord } from "./types/TimeRecord";
 import { TimeRecordTable } from "./components/TimeRecordTable";
 import { Button } from "antd";
 import { useLocalStorage } from "./util/LocalStorageHook";
@@ -11,7 +11,7 @@ function App() {
     const printDivRef = useRef<HTMLDivElement>(null);
     const [renderPrintMode, setRenderPrintMode] = useState(false);
 
-    const [timeRecords, setTimeRecords] = useLocalStorage<TimeRecord[]>("timerecords", []);
+    const [timeRecords, setTimeRecords] = useLocalStorage<CompleteTimeRecord[]>("timerecords", []);
 
     const [timeRecord, setTimeRecord] = useState<TimeRecord>({
         date: null,
@@ -26,7 +26,13 @@ function App() {
             return;
         }
 
-        setTimeRecords((records) => [...records, timeRecord]);
+        const newRecord = toCompleteRecord(timeRecord);
+        if (timeRecords.filter((r) => r.key == newRecord.key).length != 0) {
+            alert("Record with the same start date and time already exists.");
+            return;
+        }
+
+        setTimeRecords((records) => [...records, newRecord]);
         setTimeRecord({
             date: null,
             from: null,
@@ -41,6 +47,12 @@ function App() {
             await printElement(printDivRef.current!);
             setRenderPrintMode(false);
         });
+    }
+
+    function handleEdit(record: CompleteTimeRecord) {}
+
+    function handleDelete(deletedRecord: CompleteTimeRecord) {
+        setTimeRecords((records) => records.filter((record) => !Object.is(record, deletedRecord)));
     }
 
     return (
@@ -58,7 +70,12 @@ function App() {
 
             <div ref={printDivRef} className="print-me">
                 <h1 className="print-only">Time Records</h1>
-                <TimeRecordTable records={timeRecords} renderAction={!renderPrintMode}></TimeRecordTable>
+                <TimeRecordTable
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                    records={timeRecords}
+                    renderAction={!renderPrintMode}
+                ></TimeRecordTable>
             </div>
 
             <br />
