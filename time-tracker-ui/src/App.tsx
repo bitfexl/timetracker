@@ -1,6 +1,6 @@
 import { MainLayout } from "./layout/MainLayout";
 import { TrackingPage } from "./pages/TrackingPage";
-import { CompleteTimeRecord } from "./types/TimeRecord";
+import { CompleteTimeRecord, m2HHmm } from "./types/TimeRecord";
 import { useLocalStorage } from "./util/LocalStorageHook";
 
 function App() {
@@ -29,13 +29,19 @@ function App() {
         </div>
     );
 
+    const totalTimeMinutes = timeRecords.reduce((sum, curr) => sum + curr.timeInMinutes, 0);
+
     return (
         <MainLayout header={header} footer={footer}>
             <TrackingPage
                 records={timeRecords}
                 onUpdate={(e) => setTimeRecords(e.records)}
                 printHeader={<h1>Time Records</h1>}
-                printFooter={<p>Total: 12:53</p>}
+                printFooter={
+                    <p>
+                        Total time: {m2HHmm(totalTimeMinutes)} = {Math.round((totalTimeMinutes / 60) * 100) / 100} hours
+                    </p>
+                }
             ></TrackingPage>
         </MainLayout>
     );

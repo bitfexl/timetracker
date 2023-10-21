@@ -15,19 +15,22 @@ export interface SortableTimeRecord extends TimeRecord {
 }
 
 export interface CompleteTimeRecord extends SortableTimeRecord {
+    timeInMinutes: number;
     time: string | null;
 }
 
 export function toCompleteRecord(timerecord: TimeRecord): CompleteTimeRecord {
+    const minutes = getMinutes(timerecord);
     return {
         ...timerecord,
-        time: getTime(timerecord),
+        timeInMinutes: getMinutes(timerecord),
+        time: m2HHmm(minutes),
         key: getKey(timerecord),
     };
 }
 
-export function getTime(record: TimeRecord): string {
-    return m2HHmm(dayjs(record.to, timeFormat).diff(dayjs(record.from, timeFormat), "m"));
+export function getMinutes(record: TimeRecord): number {
+    return dayjs(record.to, timeFormat).diff(dayjs(record.from, timeFormat), "m");
 }
 
 export function m2HHmm(minutes: number): string {
