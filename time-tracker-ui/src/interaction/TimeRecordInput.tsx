@@ -1,17 +1,17 @@
 import { Button, DatePicker, TimePicker } from "antd";
-import { CreateTimeRecordLayout } from "../layout/CreateTimeRecordLayout";
+import { TimeRecordInputLayout } from "../layout/TimeRecordInputLayout";
 import TextArea from "antd/es/input/TextArea";
 import dayjs, { Dayjs } from "dayjs";
 import { TimeRecord } from "../types/TimeRecord";
 
-export interface CreateTimeRecordProps {
+export interface TimeRecordInputProps {
     onChange: (timeRecord: TimeRecord) => any;
     value: TimeRecord;
     onCreate: () => any;
     editMode: boolean;
 }
 
-export function CreateTimeRecord({ editMode, onChange, value, onCreate }: CreateTimeRecordProps) {
+export function TimeRecordInput({ editMode, onChange, value, onCreate }: TimeRecordInputProps) {
     const dateFormat = "YYYY-MM-DD";
     const timeFormat = "HH:mm";
 
@@ -32,7 +32,7 @@ export function CreateTimeRecord({ editMode, onChange, value, onCreate }: Create
     }
 
     return (
-        <CreateTimeRecordLayout
+        <TimeRecordInputLayout
             title={`${editMode ? "Edit" : "Create"} Time Record`}
             datePicker={
                 <DatePicker
@@ -76,6 +76,6 @@ export function CreateTimeRecord({ editMode, onChange, value, onCreate }: Create
                     {`${editMode ? "Save" : "Create"}`}
                 </Button>
             }
-        ></CreateTimeRecordLayout>
+        ></TimeRecordInputLayout>
     );
 }

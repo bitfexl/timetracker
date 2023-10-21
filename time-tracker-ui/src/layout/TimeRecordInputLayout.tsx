@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface CreateTimeRecordLayoutProps {
+export interface TimeRecordInputLayoutProps {
     title: string;
     datePicker: ReactNode;
     fromPicker: ReactNode;
@@ -9,7 +9,7 @@ export interface CreateTimeRecordLayoutProps {
     createButton: ReactNode;
 }
 
-export function CreateTimeRecordLayout({ title, datePicker, fromPicker, toPicker, taskText, createButton }: CreateTimeRecordLayoutProps) {
+export function TimeRecordInputLayout({ title, datePicker, fromPicker, toPicker, taskText, createButton }: TimeRecordInputLayoutProps) {
     return (
         <div className="flex flex-col gap-4">
             <div>
