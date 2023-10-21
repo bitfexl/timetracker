@@ -1,7 +1,11 @@
 import { MainLayout } from "./layout/MainLayout";
-import { ProjectPage } from "./pages/ProjectPage";
+import { TrackingPage } from "./pages/TrackingPage";
+import { CompleteTimeRecord } from "./types/TimeRecord";
+import { useLocalStorage } from "./util/LocalStorageHook";
 
 function App() {
+    const [timeRecords, setTimeRecords] = useLocalStorage<CompleteTimeRecord[]>("timerecords", []);
+
     const header = (
         <div>
             <h1>Time Tracker</h1>
@@ -27,7 +31,12 @@ function App() {
 
     return (
         <MainLayout header={header} footer={footer}>
-            <ProjectPage></ProjectPage>
+            <TrackingPage
+                records={timeRecords}
+                onUpdate={(e) => setTimeRecords(e.records)}
+                printHeader={<h1>Time Records</h1>}
+                printFooter={<p>Total: 12:53</p>}
+            ></TrackingPage>
         </MainLayout>
     );
 }
