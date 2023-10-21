@@ -27,7 +27,7 @@ export function ProjectPage() {
     }
 
     return (
-        <div className="inline-flex flex-col gap-2 ml-40 mr-40">
+        <div className="inline-flex flex-col gap-2">
             <TimeRecordEditor
                 records={timeRecords}
                 onCreate={(r) => setTimeRecords((records) => [...records, r])}
