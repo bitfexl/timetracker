@@ -31,18 +31,12 @@ function App() {
 
     const footer = (
         <div className="flex justify-around gap-20 text-justify">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ea esse expedita ipsum iusto repellendus reprehenderit
-                incidunt maiores? Eaque rem commodi tempore tempora enim voluptatibus dolorum voluptates, vel labore non!
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ea esse expedita ipsum iusto repellendus reprehenderit
-                incidunt maiores? Eaque rem commodi tempore tempora enim voluptatibus dolorum voluptates, vel labore non!
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ea esse expedita ipsum iusto repellendus reprehenderit
-                incidunt maiores? Eaque rem commodi tempore tempora enim voluptatibus dolorum voluptates, vel labore non!
-            </p>
+            <div>
+                <a href="https://github.com/bitfexl/timetracker" target="_blank">
+                    <img height={20} className="translate-y-1 -translate-x-2" src="https://github.com/favicon.ico" alt="GitHub icon" />
+                    GitHub
+                </a>
+            </div>
         </div>
     );
 
