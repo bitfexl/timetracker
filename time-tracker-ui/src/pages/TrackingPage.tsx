@@ -71,10 +71,8 @@ export function TrackingPage({ records, onUpdate, printHeader, printFooter }: Tr
     }
 
     return (
-        <div className="inline-flex flex-col gap-2">
+        <div className="inline-flex flex-col gap-16">
             <TimeRecordEditor records={records} onCreate={handleCreate} onEdit={handleEdit} editRecord={editRecord}></TimeRecordEditor>
-
-            <br />
 
             <div ref={printDivRef}>
                 {renderPrintMode && printHeader}
@@ -88,8 +86,6 @@ export function TrackingPage({ records, onUpdate, printHeader, printFooter }: Tr
 
                 {renderPrintMode && printFooter}
             </div>
-
-            <br />
 
             <Button onClick={doPrint}>Print</Button>
         </div>
