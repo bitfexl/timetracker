@@ -14,7 +14,7 @@ export function ProjectSelectionPage({ projects, onCreate, onOpen }: ProjectSele
     const [project, setProject] = useState<Project>({ name: null, description: null, timeRecords: [] });
 
     function handleCreate() {
-        if (project == null || projects.filter((p) => p.name == project.name).length > 0) {
+        if (project.name == null || projects.filter((p) => p.name == project.name).length > 0) {
             Modal.error({
                 title: "Invalid Input",
                 content: "Project with name '" + project.name + "' already exists.",
