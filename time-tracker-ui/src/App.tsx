@@ -54,7 +54,14 @@ function App() {
                 <TrackingPage
                     records={selectedProject?.timeRecords}
                     onUpdate={(e) => setSelectedProject({ ...selectedProject, timeRecords: e.records })}
-                    printHeader={<h1>Time Records</h1>}
+                    printHeader={
+                        <>
+                            <h1>Time Records</h1>
+                            <h2>{selectedProject.name}</h2>
+                            <p>{selectedProject.description}</p>
+                            <br />
+                        </>
+                    }
                     printFooter={
                         <p>
                             Total time: {m2HHmm(totalTimeMinutes!)} = {Math.round((totalTimeMinutes! / 60) * 100) / 100} hours
